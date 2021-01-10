@@ -1,29 +1,30 @@
-import React from 'react'
-import logo from './logo.svg'
+import React, { useState } from 'react'
 import './App.css'
+import SearchField from './components/SearchField'
+import { fetchFeedInfo } from './API'
+
+interface Feed {
+	title: string
+	link: string
+	description: string
+	lastBuildDate: string
+	image: string
+}
 
 function App() {
-	const [data, setData] = React.useState<string | null>(null)
+	const [feeds, setFeeds] = useState<Feed[]>([])
 
-	const getData = () => {
-		fetch(
-			'http://localhost:8080/api/fetchItems?link=https://blog.roblox.com/feed/'
-		)
-			.then((result) => result.text())
-			.then((res) => {
-				setData(res)
-			})
+	const fetchFeed = async (link: string) => {
+		const feed = await fetchFeedInfo(link, feeds)
+
+		if (feed) {
+			setFeeds((prev) => [...prev, feed])
+		}
 	}
+
 	return (
 		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<button onClick={getData}>Click Me For Data</button>
-				{data}
-			</header>
+			<SearchField callback={fetchFeed} />
 		</div>
 	)
 }
