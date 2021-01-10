@@ -82,14 +82,6 @@ const parseItems = (feed: FeedInfo) => {
 	return null
 }
 
-const parseContent = (feed: FeedInfo) => {
-	if (feed.item) {
-		return feed.item
-	} else {
-		return null
-	}
-}
-
 // Fetch each item from given rss feed link
 export const fetchItems = (link: string) => {
 	const feed = fetchFeed(link)

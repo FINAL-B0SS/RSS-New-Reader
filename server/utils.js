@@ -57,14 +57,6 @@ const parseItems = (feed) => {
     }
     return null;
 };
-const parseContent = (feed) => {
-    if (feed.item) {
-        return feed.item;
-    }
-    else {
-        return null;
-    }
-};
 // Fetch each item from given rss feed link
 const fetchItems = (link) => {
     const feed = fetchFeed(link);
