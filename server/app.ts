@@ -19,18 +19,20 @@ app.set('view engine', 'html')
 
 // Fetch rss feed information given XML link
 app.get('/api/fetchFeed', (req: Request, res: Response) => {
-	const link = req.body.link
-	const feed = fetchFeedInfo(link)
+	const link = req.query.link
 
-	res.send(feed)
+	if (typeof link === 'string') {
+		res.send(fetchFeedInfo(link))
+	}
 })
 
 // Fetch rss feed items
 app.get('/api/fetchItems', (req: Request, res: Response) => {
-	const link = req.body.link
-	const items = fetchItems(link)
+	const link = req.query.link
 
-	res.send(items)
+	if (typeof link === 'string') {
+		res.send(fetchItems(link))
+	}
 })
 
 // catch 404 and forward to error handler

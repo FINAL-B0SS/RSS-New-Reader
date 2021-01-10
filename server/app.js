@@ -17,15 +17,17 @@ app.use(cookie_parser_1.default());
 app.set('view engine', 'html');
 // Fetch rss feed information given XML link
 app.get('/api/fetchFeed', (req, res) => {
-    const link = req.body.link;
-    const feed = utils_1.fetchFeedInfo(link);
-    res.send(feed);
+    const link = req.query.link;
+    if (typeof link === 'string') {
+        res.send(utils_1.fetchFeedInfo(link));
+    }
 });
 // Fetch rss feed items
 app.get('/api/fetchItems', (req, res) => {
-    const link = req.body.link;
-    const items = utils_1.fetchItems(link);
-    res.send(items);
+    const link = req.query.link;
+    if (typeof link === 'string') {
+        res.send(utils_1.fetchItems(link));
+    }
 });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
