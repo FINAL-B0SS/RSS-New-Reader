@@ -6,10 +6,17 @@
     "start": "nodemon ./app.js"
   },
   "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/http-errors": "^1.8.0",
+    "@types/morgan": "^1.9.2",
+    "@types/node-fetch": "^2.5.7",
     "cookie-parser": "~1.4.4",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.6"
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.6",
+    "xml2js": "^0.4.23",
+    "xmlhttprequest": "^1.8.0"
   }
 }
