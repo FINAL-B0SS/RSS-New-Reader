@@ -3,7 +3,7 @@ export type Feed = {
 	link: string
 	description: string
 	lastBuildDate: string
-	image: string
+	image?: string
 }
 
 export const fetchFeedInfo = async (link: string, feeds: Feed[]) => {
