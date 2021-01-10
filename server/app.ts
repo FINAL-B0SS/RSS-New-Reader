@@ -2,7 +2,7 @@ import createError from 'http-errors'
 import express, { Application, Request, Response, NextFunction } from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import { fetchFeedInfo } from './utils'
+import { fetchFeedInfo, fetchItems } from './utils'
 
 interface Error {
 	message: string
@@ -23,6 +23,14 @@ app.get('/api/fetchFeed', (req: Request, res: Response) => {
 	const feed = fetchFeedInfo(link)
 
 	res.send(feed)
+})
+
+// Fetch rss feed items
+app.get('/api/fetchItems', (req: Request, res: Response) => {
+	const link = req.body.link
+	const items = fetchItems(link)
+
+	res.send(items)
 })
 
 // catch 404 and forward to error handler

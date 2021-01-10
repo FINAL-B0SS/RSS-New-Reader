@@ -1,12 +1,22 @@
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 const parseString = require('xml2js').parseString
 
+interface Item {
+	title: string
+	description: string
+	image: string
+	link: string
+	pubDate: string
+	'content:encoded': string
+}
+
 interface FeedInfo {
 	title: string
 	link: string
 	description: string
 	lastBuildDate: string
 	image: string
+	item?: Item[]
 }
 
 const httpGet = (theUrl: string) => {
@@ -62,5 +72,45 @@ export const fetchFeedInfo = (link: string): FeedInfo | null => {
 
 		return feedInfo
 	}
+	return null
+}
+
+const parseItems = (feed: FeedInfo) => {
+	if (feed.item) {
+		return feed.item
+	}
+	return null
+}
+
+const parseContent = (feed: FeedInfo) => {
+	if (feed.item) {
+		return feed.item
+	} else {
+		return null
+	}
+}
+
+// Fetch each item from given rss feed link
+export const fetchItems = (link: string) => {
+	const feed = fetchFeed(link)
+	const feedItems = parseItems(feed)
+
+	if (feedItems) {
+		const items = feedItems.map((item) => {
+			return {
+				title: item.title[0],
+				description: item.description[0],
+				image: null,
+				link: Array.isArray(item.link) ? item.link[0] : item.link,
+				pubDate: item.pubDate[0],
+				'content:encoded': item['content:encoded']
+					? item['content:encoded'][0]
+					: null,
+			}
+		})
+
+		return items
+	}
+
 	return null
 }

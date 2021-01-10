@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchFeedInfo = void 0;
+exports.fetchItems = exports.fetchFeedInfo = void 0;
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const parseString = require('xml2js').parseString;
 const httpGet = (theUrl) => {
@@ -51,3 +51,39 @@ const fetchFeedInfo = (link) => {
     return null;
 };
 exports.fetchFeedInfo = fetchFeedInfo;
+const parseItems = (feed) => {
+    if (feed.item) {
+        return feed.item;
+    }
+    return null;
+};
+const parseContent = (feed) => {
+    if (feed.item) {
+        return feed.item;
+    }
+    else {
+        return null;
+    }
+};
+// Fetch each item from given rss feed link
+const fetchItems = (link) => {
+    const feed = fetchFeed(link);
+    const feedItems = parseItems(feed);
+    if (feedItems) {
+        const items = feedItems.map((item) => {
+            return {
+                title: item.title[0],
+                description: item.description[0],
+                image: null,
+                link: Array.isArray(item.link) ? item.link[0] : item.link,
+                pubDate: item.pubDate[0],
+                'content:encoded': item['content:encoded']
+                    ? item['content:encoded'][0]
+                    : null,
+            };
+        });
+        return items;
+    }
+    return null;
+};
+exports.fetchItems = fetchItems;

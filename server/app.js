@@ -21,6 +21,12 @@ app.get('/api/fetchFeed', (req, res) => {
     const feed = utils_1.fetchFeedInfo(link);
     res.send(feed);
 });
+// Fetch rss feed items
+app.get('/api/fetchItems', (req, res) => {
+    const link = req.body.link;
+    const items = utils_1.fetchItems(link);
+    res.send(items);
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(http_errors_1.default(404));
