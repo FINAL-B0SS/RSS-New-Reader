@@ -56,23 +56,29 @@ const PageNavigation: React.FC<Props> = ({
 								Home
 							</Button>
 						)}
-						<Button
-							onClick={() => callback('-')}
-							className={classes.searchButton}
-						>
-							Prev
-						</Button>
-						<Button
-							onClick={() => callback('+')}
-							className={classes.searchButton}
-						>
-							Next
-						</Button>
+						{pageCount > 1 && (
+							<div>
+								<Button
+									onClick={() => callback('-')}
+									className={classes.searchButton}
+								>
+									Prev
+								</Button>
+								<Button
+									onClick={() => callback('+')}
+									className={classes.searchButton}
+								>
+									Next
+								</Button>
+							</div>
+						)}
 					</Box>
 				</Grid>
-				<span className={classes.pageCounter}>
-					Page: {page + 1} / {pageCount}
-				</span>
+				{pageCount > 1 && (
+					<span className={classes.pageCounter}>
+						Page: {page + 1} / {pageCount}
+					</span>
+				)}
 			</Grid>
 		</Grid>
 	)
