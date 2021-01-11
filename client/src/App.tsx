@@ -1,6 +1,5 @@
 import './App.css'
-import { Feed } from './API'
-import { fetchFeedInfo } from './API'
+import { Item, Feed, fetchFeedInfo, fetchFeedItems } from './API'
 import React, { useState } from 'react'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
@@ -20,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const App: React.FC = () => {
 	const [feeds, setFeeds] = useState<Feed[]>([])
+	const [items, setItems] = useState<Item[]>([])
 
 	const classes = useStyles()
 
@@ -30,13 +30,24 @@ const App: React.FC = () => {
 		}
 	}
 
+	const fetchItems = async (link: string) => {
+		const feedItems = await fetchFeedItems(link, feeds)
+		if (Array.isArray(feedItems)) {
+			setItems(feedItems)
+		}
+	}
+
 	return (
 		<Box className='App'>
 			<Grid container direction='column' alignItems='center'>
 				<Typography className={classes.title}>My News Reader</Typography>
 				<SearchField callback={fetchFeed} />
 				{feeds.map((element) => (
-					<FeedInfoCard key={element.link} feed={element} />
+					<FeedInfoCard
+						key={element.link}
+						feed={element}
+						callback={fetchItems}
+					/>
 				))}
 			</Grid>
 		</Box>

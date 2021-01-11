@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 
 type Props = {
 	feed: Feed
+	callback: (text: string) => void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const FeedInfoCard: React.FC<Props> = ({ feed }) => {
+const FeedInfoCard: React.FC<Props> = ({ feed, callback }) => {
 	const classes = useStyles()
 
 	return (
 		<Grid container direction='row' justify='center'>
-			<Card className={classes.root}>
+			<Card className={classes.root} onClick={() => callback(feed.link)}>
 				<CardContent>
 					{feed.image && <img src={feed.image} alt={feed.title}></img>}
 					<Typography variant='h5' component='h5'>
