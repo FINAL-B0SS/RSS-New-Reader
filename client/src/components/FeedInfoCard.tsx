@@ -13,6 +13,7 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		border: '2px solid black',
 		width: theme.spacing(85),
 		margin: theme.spacing(1),
 		borderRadius: theme.spacing(5),

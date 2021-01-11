@@ -11,40 +11,43 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
 	container: {
-		backgroundColor: '#f7f8f9',
 		height: '100vh',
-	},
-	search: {
-		marginTop: theme.spacing(1),
+		backgroundColor: '#f7f8f9',
 	},
 	textField: {
-		backgroundColor: '#FFFFFF',
 		borderRadius: 10,
+		backgroundColor: '#FFFFFF',
+		height: theme.spacing(7),
 		[`& fieldset`]: {
 			borderRadius: 10,
+			border: '2px solid black',
 		},
 	},
 	buttonProgress: {
-		position: 'absolute',
 		top: '50%',
 		left: '50%',
-		marginTop: -12,
+		position: 'absolute',
 		marginLeft: -12,
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2),
+		marginTop: -12,
 	},
 	searchButton: {
 		fontSize: '1rem',
-		padding: theme.spacing(1, 3),
-		border: '1px solid #4A4A4A',
-		width: theme.spacing(10),
-		justify: 'right',
 		margin: '0 auto',
-		marginLeft: '1rem',
-		borderRadius: 10,
+		justify: 'right',
 		color: '#FFFFFF',
+		marginLeft: '1rem',
+		border: '2px solid black',
 		backgroundColor: '#6441A5',
+		width: theme.spacing(10),
+		height: theme.spacing(7),
+		padding: theme.spacing(1, 3),
+		borderRadius: theme.spacing(1),
+	},
+	box: {
+		width: theme.spacing(85),
+		marginBottom: theme.spacing(1),
+		display: 'flex',
+		alignItems: 'center',
 	},
 }))
 
@@ -54,35 +57,23 @@ const SearchField: React.FC<Props> = ({ callback }) => {
 
 	return (
 		<Grid container direction='row' justify='center'>
-			<Box mb={1}>
-				<Box py={5}>
-					<Grid item xs={7}>
-						<Box
-							mt={1}
-							mb={4}
-							minWidth={700}
-							display='flex'
-							alignItems='center'
-						>
-							<TextField
-								className={classes.textField}
-								fullWidth
-								variant='outlined'
-								placeholder='Paste XML link to RSS feed here...'
-								onChange={(e) => {
-									setSearchText(e.target.value)
-								}}
-								onSubmit={(e) => callback(searchText)}
-							/>
-							<Button
-								className={classes.searchButton}
-								onClick={() => callback(searchText)}
-							>
-								Add
-							</Button>
-						</Box>
-					</Grid>
-				</Box>
+			<Box className={classes.box}>
+				<TextField
+					className={classes.textField}
+					fullWidth
+					variant='outlined'
+					placeholder='Paste XML link to RSS feed here...'
+					onChange={(e) => {
+						setSearchText(e.target.value)
+					}}
+					onSubmit={(e) => callback(searchText)}
+				/>
+				<Button
+					className={classes.searchButton}
+					onClick={() => callback(searchText)}
+				>
+					Add
+				</Button>
 			</Box>
 		</Grid>
 	)
