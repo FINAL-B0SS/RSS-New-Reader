@@ -13,15 +13,13 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		minWidth: 500,
-		maxWidth: 500,
+		width: theme.spacing(85),
 		margin: theme.spacing(1),
+		borderRadius: theme.spacing(5),
 	},
 	title: {
-		fontSize: 14,
-	},
-	pos: {
-		marginBottom: 12,
+		fontSize: theme.spacing(3),
+		fontWeight: 'bold',
 	},
 }))
 
@@ -33,15 +31,15 @@ const FeedInfoCard: React.FC<Props> = ({ feed, callback }) => {
 			<Card className={classes.root} onClick={() => callback(feed.link)}>
 				<CardContent>
 					{feed.image && <img src={feed.image} alt={feed.title}></img>}
-					<Typography variant='h5' component='h5'>
-						{feed.title}
-					</Typography>
-					<Typography variant='body2' component='p'>
-						<br />
-						{feed.description}
-					</Typography>
+					<Typography className={classes.title}>{feed.title}</Typography>
+					{feed.description && (
+						<Typography variant='body2' component='p'>
+							<br />
+							{feed.description}
+						</Typography>
+					)}
 					{feed.lastBuildDate && (
-						<Typography className={classes.pos} color='textSecondary'>
+						<Typography color='textSecondary'>
 							<br />
 							{`Last Updated: ${feed.lastBuildDate}`}
 						</Typography>
