@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	pageCounter: {
 		fontWeight: 'bold',
+		fontFamily: 'Monospace',
+		fontSize: theme.spacing(2),
 		marginRight: theme.spacing(11),
 	},
 }))
