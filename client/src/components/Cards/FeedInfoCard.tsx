@@ -1,5 +1,5 @@
 import React from 'react'
-import { Feed } from '../../API'
+import { Feed } from '../../utils'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 
 type Props = {
 	feed: Feed
-	callback: (text: string) => void
+	callback: (link: string, title: string) => void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,10 @@ const FeedInfoCard: React.FC<Props> = ({ feed, callback }) => {
 
 	return (
 		<Grid container direction='row' justify='center'>
-			<Card className={classes.root} onClick={() => callback(feed.link)}>
+			<Card
+				className={classes.root}
+				onClick={() => callback(feed.link, feed.title)}
+			>
 				<CardContent>
 					{feed.image && <img src={feed.image} alt={feed.title}></img>}
 					<Typography className={classes.title}>{feed.title}</Typography>

@@ -10,10 +10,6 @@ type Props = {
 }
 
 const useStyles = makeStyles((theme) => ({
-	container: {
-		height: '100vh',
-		backgroundColor: '#f7f8f9',
-	},
 	textField: {
 		borderRadius: 10,
 		backgroundColor: '#FFFFFF',
@@ -22,13 +18,6 @@ const useStyles = makeStyles((theme) => ({
 			borderRadius: 10,
 			border: '2px solid black',
 		},
-	},
-	buttonProgress: {
-		top: '50%',
-		left: '50%',
-		position: 'absolute',
-		marginLeft: -12,
-		marginTop: -12,
 	},
 	searchButton: {
 		fontSize: '1rem',

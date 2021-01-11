@@ -1,19 +1,4 @@
-export type Feed = {
-	title: string
-	link: string
-	description: string
-	lastBuildDate: string
-	image?: string
-}
-
-export type Item = {
-	title: string
-	description: string
-	image: string
-	link: string
-	pubDate: string
-	'content:encoded': string
-}
+import { Feed } from './utils'
 
 export const fetchFeedInfo = async (link: string, feeds: Feed[]) => {
 	if (!feeds.find((element) => element.link === link)) {
