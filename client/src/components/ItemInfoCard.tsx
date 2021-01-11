@@ -13,15 +13,13 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		minWidth: 500,
-		maxWidth: 500,
+		width: theme.spacing(85),
 		margin: theme.spacing(1),
+		borderRadius: theme.spacing(5),
 	},
 	title: {
-		fontSize: 14,
-	},
-	pos: {
-		marginBottom: 12,
+		fontSize: theme.spacing(3),
+		fontWeight: 'bold',
 	},
 }))
 
@@ -32,15 +30,12 @@ const ItemInfoCard: React.FC<Props> = ({ item }) => {
 		<Grid container direction='row' justify='center'>
 			<Card className={classes.root}>
 				<CardContent>
-					<Typography variant='h5' component='h5'>
-						{item.title}
-					</Typography>
+					<Typography className={classes.title}>{item.title}</Typography>
 					<Typography variant='body2' component='p'>
-						<br />
 						{removeTags(item.description)}
 					</Typography>
 					{item.pubDate && (
-						<Typography className={classes.pos} color='textSecondary'>
+						<Typography color='textSecondary'>
 							<br />
 							{`Last Updated: ${item.pubDate}`}
 						</Typography>
