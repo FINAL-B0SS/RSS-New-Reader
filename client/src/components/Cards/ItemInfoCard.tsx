@@ -1,6 +1,6 @@
 import React from 'react'
-import { Item } from '../API'
-import { removeTags } from '../utils'
+import { Item } from '../../API'
+import { removeTags } from '../../utils'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
