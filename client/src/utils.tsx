@@ -28,9 +28,11 @@ export const buildFeedInfoCards = (
 	callback: (link: string, title: string) => void,
 	page: number
 ) => {
-	return feeds.map((element) => (
-		<FeedInfoCard key={element.link} feed={element} callback={callback} />
-	))
+	return feeds
+		.map((element) => (
+			<FeedInfoCard key={element.link} feed={element} callback={callback} />
+		))
+		.slice(page, page + 5)
 }
 export const buildItemInfoCards = (items: Item[], page: number) => {
 	return items
