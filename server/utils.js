@@ -7,8 +7,8 @@ const httpGet = (theUrl) => {
     let req = new XMLHttpRequest();
     let ret;
     req.open('GET', theUrl, false);
-    req.send(null);
-    parseString(req.responseText, function (err, result) {
+    req.send();
+    parseString(req.responseText, (err, result) => {
         ret = result;
     });
     return ret;
@@ -16,7 +16,7 @@ const httpGet = (theUrl) => {
 // Parse xml for object containing feed information
 const fetchFeed = (link) => {
     const data = httpGet(link);
-    let feed;
+    let feed = null;
     if (data.feed) {
         feed = data.feed;
     }
@@ -27,6 +27,15 @@ const fetchFeed = (link) => {
         feed = feed[0];
     }
     return feed;
+};
+const fetchDescription = (feed) => {
+    if (feed.description) {
+        return feed.description[0];
+    }
+    else if (feed.subtitle) {
+        return feed.subtitle[0];
+    }
+    return null;
 };
 // Extract basic info about rss feed (title, source, description, image, and last update)
 const fetchFeedInfo = (link) => {
@@ -42,7 +51,7 @@ const fetchFeedInfo = (link) => {
         const feedInfo = {
             title: feed.title[0],
             link: link,
-            description: feed.description ? feed.description[0] : null,
+            description: fetchDescription(feed),
             lastBuildDate: feed.lastBuildDate ? feed.lastBuildDate[0] : null,
             image: image,
         };
