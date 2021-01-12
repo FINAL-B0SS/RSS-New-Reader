@@ -35,25 +35,33 @@ const fetchDescription = (feed) => {
     else if (feed.subtitle) {
         return feed.subtitle[0];
     }
+    else if (feed['media:group']) {
+        return feed['media:group'][0]['media:description'][0];
+    }
+    return null;
+};
+const fetchImage = (item) => {
+    if (item.icon) {
+        return item.icon[0];
+    }
+    else if (item.image) {
+        return item.image[0].url[0];
+    }
+    else if (item['media:group']) {
+        return item['media:group'][0]['media:thumbnail'][0]['$'].url;
+    }
     return null;
 };
 // Extract basic info about rss feed (title, source, description, image, and last update)
 const fetchFeedInfo = (link) => {
     const feed = fetchFeed(link);
-    let image;
     if (feed) {
-        if (feed.icon) {
-            image = feed.icon[0];
-        }
-        else if (feed.image) {
-            image = feed.image[0].url[0];
-        }
         const feedInfo = {
             title: feed.title[0],
             link: link,
             description: fetchDescription(feed),
             lastBuildDate: feed.lastBuildDate ? feed.lastBuildDate[0] : null,
-            image: image,
+            image: fetchImage(feed),
         };
         return feedInfo;
     }
@@ -63,6 +71,18 @@ exports.fetchFeedInfo = fetchFeedInfo;
 const parseItems = (feed) => {
     if (feed.item) {
         return feed.item;
+    }
+    else if (feed.entry) {
+        return feed.entry;
+    }
+    return null;
+};
+const fetchContent = (item) => {
+    if (item['content:encoded']) {
+        return item['content:encoded'][0];
+    }
+    else if (item['media:group']) {
+        return item['media:group'][0]['media:description'][0];
     }
     return null;
 };
@@ -74,13 +94,11 @@ const fetchItems = (link) => {
         const items = feedItems.map((item) => {
             return {
                 title: item.title[0],
-                description: item.description[0],
-                image: null,
+                description: fetchDescription(item),
+                image: fetchImage(item),
                 link: Array.isArray(item.link) ? item.link[0] : item.link,
-                pubDate: item.pubDate[0],
-                'content:encoded': item['content:encoded']
-                    ? item['content:encoded'][0]
-                    : null,
+                pubDate: item.pubDate ? item.pubDate[0] : null,
+                content: fetchContent(item),
             };
         });
         return items;

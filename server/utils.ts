@@ -7,7 +7,7 @@ interface Item {
 	image: string
 	link: string
 	pubDate: string
-	'content:encoded': string
+	content: string
 }
 
 interface FeedInfo {
@@ -56,6 +56,19 @@ const fetchDescription = (feed: any) => {
 		return feed.description[0]
 	} else if (feed.subtitle) {
 		return feed.subtitle[0]
+	} else if (feed['media:group']) {
+		return feed['media:group'][0]['media:description'][0]
+	}
+	return null
+}
+
+const fetchImage = (item: any) => {
+	if (item.icon) {
+		return item.icon[0]
+	} else if (item.image) {
+		return item.image[0].url[0]
+	} else if (item['media:group']) {
+		return item['media:group'][0]['media:thumbnail'][0]['$'].url
 	}
 	return null
 }
@@ -63,20 +76,14 @@ const fetchDescription = (feed: any) => {
 // Extract basic info about rss feed (title, source, description, image, and last update)
 export const fetchFeedInfo = (link: string): FeedInfo | null => {
 	const feed = fetchFeed(link)
-	let image
 
 	if (feed) {
-		if (feed.icon) {
-			image = feed.icon[0]
-		} else if (feed.image) {
-			image = feed.image[0].url[0]
-		}
 		const feedInfo = {
 			title: feed.title[0],
 			link: link,
 			description: fetchDescription(feed),
 			lastBuildDate: feed.lastBuildDate ? feed.lastBuildDate[0] : null,
-			image: image,
+			image: fetchImage(feed),
 		}
 
 		return feedInfo
@@ -84,9 +91,20 @@ export const fetchFeedInfo = (link: string): FeedInfo | null => {
 	return null
 }
 
-const parseItems = (feed: FeedInfo) => {
+const parseItems = (feed: any) => {
 	if (feed.item) {
 		return feed.item
+	} else if (feed.entry) {
+		return feed.entry
+	}
+	return null
+}
+
+const fetchContent = (item: any) => {
+	if (item['content:encoded']) {
+		return item['content:encoded'][0]
+	} else if (item['media:group']) {
+		return item['media:group'][0]['media:description'][0]
 	}
 	return null
 }
@@ -97,16 +115,14 @@ export const fetchItems = (link: string) => {
 	const feedItems = parseItems(feed)
 
 	if (feedItems) {
-		const items = feedItems.map((item) => {
+		const items = feedItems.map((item: any) => {
 			return {
 				title: item.title[0],
-				description: item.description[0],
-				image: null,
+				description: fetchDescription(item),
+				image: fetchImage(item),
 				link: Array.isArray(item.link) ? item.link[0] : item.link,
-				pubDate: item.pubDate[0],
-				'content:encoded': item['content:encoded']
-					? item['content:encoded'][0]
-					: null,
+				pubDate: item.pubDate ? item.pubDate[0] : null,
+				content: fetchContent(item),
 			}
 		})
 
