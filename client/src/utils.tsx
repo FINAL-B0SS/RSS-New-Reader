@@ -18,6 +18,11 @@ export type Item = {
 	'content:encoded': string
 }
 
+export type Cords = {
+	lat: number
+	long: number
+}
+
 export const buildFeedInfoCards = (
 	feeds: Feed[],
 	callback: (link: string, title: string) => void,
