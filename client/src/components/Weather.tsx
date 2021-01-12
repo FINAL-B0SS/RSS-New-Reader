@@ -7,10 +7,9 @@ import { Cords } from '../utils'
 
 const useStyles = makeStyles((theme) => ({
 	box: {
-		width: theme.spacing(85),
-		marginBottom: theme.spacing(1),
+		height: 0,
 		display: 'flex',
-		alignItems: 'start',
+		alignItems: 'center',
 	},
 	text: {
 		fontWeight: 'bold',
@@ -71,17 +70,16 @@ const Weather: React.FC<Props> = ({ cords }) => {
 	}, [cords])
 
 	return (
-		<Box className={classes.box} flexDirection='column'>
+		<>
 			{weather && (
-				<>
+				<Box className={classes.box} flexDirection='column'>
 					<img src={weather.icon} alt={weather.desc}></img>
 					<Typography className={classes.text}>{weather.desc}</Typography>
-					<Typography className={classes.text}>
-						{weather.name} | {weather.temp}
-					</Typography>
-				</>
+					<Typography className={classes.text}>{weather.name}</Typography>
+					<Typography className={classes.text}>{weather.temp}</Typography>
+				</Box>
 			)}
-		</Box>
+		</>
 	)
 }
 

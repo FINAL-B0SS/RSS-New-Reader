@@ -11,6 +11,7 @@ type Props = {
 const useStyles = makeStyles((theme) => ({
 	box: {
 		width: theme.spacing(85),
+		height: theme.spacing(22),
 		marginBottom: theme.spacing(1),
 		display: 'flex',
 		alignItems: 'start',

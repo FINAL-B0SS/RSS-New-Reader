@@ -1,11 +1,13 @@
 import './App.css'
-import React, { useState, useEffect } from 'react'
 import Box from '@material-ui/core/Box'
 import Header from './components/Header'
 import Grid from '@material-ui/core/Grid'
 import SearchField from './components/SearchField'
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import { fetchFeedInfo, fetchFeedItems } from './API'
 import PageNavigation from './components/PageNavigation'
+
 import {
 	Cords,
 	Item,
@@ -15,12 +17,23 @@ import {
 } from './utils'
 import Weather from './components/Weather'
 
+const useStyles = makeStyles((theme) => ({
+	header: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignContent: 'center',
+		width: theme.spacing(60),
+		paddingBottom: theme.spacing(5),
+	},
+}))
+
 const App: React.FC = () => {
 	const [feeds, setFeeds] = useState<Feed[]>([])
 	const [items, setItems] = useState<Item[]>([])
 	const [title, setTitle] = useState<string>('My News Reader')
 	const [page, setPage] = useState<number>(0)
 	const [cords, setCords] = useState<Cords | null>(null)
+	const classes = useStyles()
 
 	const pageCount = Math.ceil(
 		(items.length > 0 ? items.length : feeds.length) / 5
@@ -67,8 +80,10 @@ const App: React.FC = () => {
 	return (
 		<Box className='App'>
 			<Grid container direction='column' alignItems='center'>
-				<Header title={title} />
-				{cords && <Weather cords={cords} />}
+				<Box className={classes.header}>
+					<Header title={title} />
+					{cords && <Weather cords={cords} />}
+				</Box>
 				{items.length === 0 ? (
 					<>
 						<SearchField callback={fetchFeed} />{' '}
