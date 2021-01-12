@@ -1,27 +1,6 @@
 import FeedInfoCard from './components/Cards/FeedInfoCard'
 import ItemInfoCard from './components/Cards/ItemInfoCard'
-
-export type Feed = {
-	title: string
-	link: string
-	description: string
-	lastBuildDate: string
-	image?: string
-}
-
-export type Item = {
-	title: string
-	description: string
-	image: string
-	link: string
-	pubDate: string
-	content: string
-}
-
-export type Cords = {
-	lat: number
-	long: number
-}
+import { Feed, Item } from './types'
 
 export const buildFeedInfoCards = (
 	feeds: Feed[],

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, Grid, Typography, makeStyles } from '@material-ui/core/'
 
 type Props = {
 	title: string

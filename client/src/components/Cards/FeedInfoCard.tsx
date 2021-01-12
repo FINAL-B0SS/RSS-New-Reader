@@ -1,10 +1,12 @@
 import React from 'react'
-import { Feed } from '../../utils'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import CardContent from '@material-ui/core/CardContent'
+import { Feed } from '../../types'
+import {
+	Grid,
+	Card,
+	Typography,
+	CardContent,
+	makeStyles,
+} from '@material-ui/core/'
 
 type Props = {
 	feed: Feed

@@ -1,8 +1,5 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, Grid, Button, makeStyles } from '@material-ui/core/'
 
 type Props = {
 	callback: (option: string) => void

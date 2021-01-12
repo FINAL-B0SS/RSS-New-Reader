@@ -1,20 +1,12 @@
 import './App.css'
-import Box from '@material-ui/core/Box'
 import Header from './components/Header'
-import Grid from '@material-ui/core/Grid'
 import SearchField from './components/SearchField'
 import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { fetchFeedInfo, fetchFeedItems } from './API'
 import PageNavigation from './components/PageNavigation'
-
-import {
-	Cords,
-	Item,
-	Feed,
-	buildFeedInfoCards,
-	buildItemInfoCards,
-} from './utils'
+import { makeStyles, Box, Grid } from '@material-ui/core/'
+import { Cords, Item, Feed } from './types'
+import { buildFeedInfoCards, buildItemInfoCards } from './utils'
 import Weather from './components/Weather'
 
 const useStyles = makeStyles((theme) => ({

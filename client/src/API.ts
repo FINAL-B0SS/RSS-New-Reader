@@ -1,8 +1,8 @@
-import { Feed, Cords } from './utils'
+import { Feed, Cords } from './types'
 
 export const fetchFeedInfo = async (link: string, feeds: Feed[]) => {
 	if (!feeds.find((element) => element.link === link)) {
-		const endpoint = `http://localhost:8080/api/fetchFeed?link=${link}`
+		const endpoint = `/api/fetchFeed?link=${link}`
 
 		let data = await fetch(endpoint)
 			.then((res) => res.json())
@@ -20,7 +20,7 @@ export const fetchFeedInfo = async (link: string, feeds: Feed[]) => {
 }
 
 export const fetchFeedItems = async (link: string, feeds: Feed[]) => {
-	const endpoint = `http://localhost:8080/api/fetchItems?link=${link}`
+	const endpoint = `/api/fetchItems?link=${link}`
 
 	let data = await fetch(endpoint)
 		.then((res) => res.json())
