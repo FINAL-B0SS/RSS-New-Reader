@@ -31,7 +31,6 @@ export const fetchFeedItems = async (link: string, feeds: Feed[]) => {
 }
 
 export const fetchWeather = async (cords: Cords) => {
-	console.log('hit')
 	const api_key = 'eeacfe5f48da586c22f4f91fcfa47c74'
 	const endpoint = `http://api.openweathermap.org/data/2.5/weather?lat=${cords.lat}&lon=${cords.long}&appid=${api_key}`
 
