@@ -15,7 +15,7 @@ export type Item = {
 	image: string
 	link: string
 	pubDate: string
-	'content:encoded': string
+	content: string
 }
 
 export type Cords = {

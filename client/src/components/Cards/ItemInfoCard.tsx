@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Item } from '../../utils'
 import { removeTags } from '../../utils'
 import Grid from '@material-ui/core/Grid'
@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import CardContent from '@material-ui/core/CardContent'
+import ItemDialog from '../ItemDialog'
 
 type Props = {
 	item: Item
@@ -26,10 +27,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemInfoCard: React.FC<Props> = ({ item }) => {
 	const classes = useStyles()
+	let [dialogToggle, setDialogToggle] = useState<boolean>(false)
+
+	const handleClose = () => {
+		console.log('xxxxxhit')
+		setDialogToggle(false)
+	}
 
 	return (
 		<Grid container direction='row' justify='center'>
-			<Card className={classes.root}>
+			<Card className={classes.root} onClick={() => setDialogToggle(true)}>
 				<CardContent>
 					<Typography className={classes.title}>{item.title}</Typography>
 					<Typography variant='body2' component='p'>
@@ -43,6 +50,11 @@ const ItemInfoCard: React.FC<Props> = ({ item }) => {
 					)}
 				</CardContent>
 			</Card>
+			<ItemDialog
+				dialogToggle={dialogToggle}
+				callback={handleClose}
+				item={item}
+			/>
 		</Grid>
 	)
 }
