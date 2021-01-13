@@ -35,17 +35,19 @@ const Weather: React.FC<Props> = ({ cords }) => {
 
 	useEffect(() => {
 		fetchWeather(cords).then((data) => {
-			let name = data.name
-			let desc = data.weather[0].main
-			let icon = weatherIcons[desc]
-			let temp = `${Math.floor((data.main.temp - 273) * (9 / 5) + 32)}°F`
+			if (data.weather) {
+				let name = data.name
+				let desc = data.weather[0].main
+				let icon = weatherIcons[desc]
+				let temp = `${Math.floor((data.main.temp - 273) * (9 / 5) + 32)}°F`
 
-			setWeather({
-				name,
-				temp,
-				desc,
-				icon,
-			})
+				setWeather({
+					name,
+					temp,
+					desc,
+					icon,
+				})
+			}
 		})
 	}, [cords])
 
