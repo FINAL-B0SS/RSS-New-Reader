@@ -1,12 +1,12 @@
 
 ## Usage
 My News Reader is a simple react app where you can read news articles that you provide from RSS formatted xml links. Not every link will work due to some using slightly different formatting. here are a few great feeds to test with.
-http://feeds.feedburner.com/psblog
-https://blog.roblox.com/feed/
-https://www.pcgamer.com/rss/
-https://www.buzzfeed.com/world.xml
-https://www.theguardian.com/world/rss
-https://www.cnbc.com/id/100727362/device/rss/rss.html
+- http://feeds.feedburner.com/psblog
+- https://blog.roblox.com/feed/
+- https://www.pcgamer.com/rss/
+- https://www.buzzfeed.com/world.xml
+- https://www.theguardian.com/world/rss
+- https://www.cnbc.com/id/100727362/device/rss/rss.html
 
 ![enter image description here](https://media0.giphy.com/media/1Yr0G20W3gPexYoWex/giphy.gif)
 ## Setup
