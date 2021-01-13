@@ -3,10 +3,15 @@
 ## Project Description
 
 My News Reader is a simple react app where you can read news articles that you provide from RSS formatted xml links.
+
 ![enter image description here](https://i.imgur.com/1PCmbQS.png)
+
 At the home screen the title of the app, current time/day, weather info, and search box for adding feeds are displayed at the top. And the feeds users add are listed below and paginated by five
+
 ![enter image description here](https://i.imgur.com/CmWwo5e.png)
+
 When a user clicks on one of the feeds listed on the home page, a list of items from that feed will be displayed. The items are paginated in groups of 5
+
 ![enter image description here](https://i.imgur.com/GWhaZiq.png)
 
 
