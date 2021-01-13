@@ -1,7 +1,6 @@
 import React from 'react'
-import { Item } from './../types'
+import { Item } from '../../types'
 import { Link, makeStyles } from '@material-ui/core/'
-
 import {
 	Typography,
 	DialogTitle,
@@ -11,7 +10,7 @@ import {
 	DialogContentText,
 } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	title: {
 		backgroundColor: '#FBFDFF',
 		borderBottom: '2px solid #E6EBF5',
@@ -30,12 +29,12 @@ type Props = {
 	callback: () => void
 }
 
+const stringToHTML = (html: string) => {
+	return { __html: html }
+}
+
 const ItemDialog: React.FC<Props> = ({ dialogToggle, callback, item }) => {
 	const classes = useStyles()
-
-	function createMarkup(html: string) {
-		return { __html: html }
-	}
 
 	return (
 		<Dialog
@@ -61,7 +60,7 @@ const ItemDialog: React.FC<Props> = ({ dialogToggle, callback, item }) => {
 			<DialogContent>
 				<DialogContentText>
 					<div
-						dangerouslySetInnerHTML={createMarkup(
+						dangerouslySetInnerHTML={stringToHTML(
 							item.content ? item.content : item.description
 						)}
 					/>

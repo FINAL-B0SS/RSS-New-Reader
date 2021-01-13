@@ -51,7 +51,7 @@ const SearchField: React.FC<Props> = ({ callback }) => {
 					onChange={(e) => {
 						setSearchText(e.target.value)
 					}}
-					onSubmit={(e) => callback(searchText)}
+					onSubmit={() => callback(searchText)}
 				/>
 				<Button
 					className={classes.searchButton}

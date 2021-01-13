@@ -1,5 +1,5 @@
 import React from 'react'
-import { Feed } from '../../types'
+import { Feed } from '../../../types'
 import {
 	Grid,
 	Card,

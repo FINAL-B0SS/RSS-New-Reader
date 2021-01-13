@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Cords } from '../types'
-import { fetchWeather } from '../API'
+import { Cords, Icons, WeatherInfo } from '../../types'
+import { fetchWeather } from '../../controllers/fetchWeather'
 import { Box, Typography, makeStyles } from '@material-ui/core/'
 
 const useStyles = makeStyles((theme) => ({
@@ -14,24 +14,6 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: theme.spacing(3),
 	},
 }))
-
-type WeatherInfo = {
-	name: string
-	desc: string
-	temp: string
-	icon: string
-}
-
-type Icons = {
-	[index: string]: string
-	Thunderstorm: string
-	Drizzle: string
-	Rain: string
-	Snow: string
-	Atmosphere: string
-	Clear: string
-	Clouds: string
-}
 
 type Props = {
 	cords: Cords

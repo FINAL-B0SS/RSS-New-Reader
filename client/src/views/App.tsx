@@ -1,13 +1,16 @@
-import './App.css'
+import '../App.css'
+import { Navigation } from '../types'
 import Header from './components/Header'
+import Weather from './components/Weather'
+import { Cords, Item, Feed } from '../types'
 import SearchField from './components/SearchField'
 import React, { useState, useEffect } from 'react'
-import { fetchFeedInfo, fetchFeedItems } from './API'
 import PageNavigation from './components/PageNavigation'
 import { makeStyles, Box, Grid } from '@material-ui/core/'
-import { Cords, Item, Feed } from './types'
-import { buildFeedInfoCards, buildItemInfoCards } from './utils'
-import Weather from './components/Weather'
+import { fetchItemInfo } from '../controllers/fetchItemInfo'
+import { fetchFeedInfo } from '../controllers/fetchFeedInfo'
+import { buildFeedInfoCards } from '../models/buildFeedInfoCards'
+import { buildItemInfoCards } from '../models/buildItemInfoCards'
 
 const useStyles = makeStyles((theme) => ({
 	header: {
@@ -50,27 +53,31 @@ const App: React.FC = () => {
 	}
 
 	const fetchItems = async (link: string, title: string) => {
-		const feedItems = await fetchFeedItems(link, feeds)
+		const feedItems = await fetchItemInfo(link)
 		if (Array.isArray(feedItems)) {
 			setItems(feedItems)
 			setTitle(title)
 		}
 	}
 
+	const reset = () => {
+		setPage(0)
+		setItems([])
+		setTitle('My News Reader')
+	}
+
 	const pageNavigation = (option: string) => {
 		if (option === '.') {
-			setPage(0)
-			setItems([])
-			setTitle('My News Reader')
-		} else if (option === '+' && page + 1 < pageCount) {
+			reset()
+		} else if (option === Navigation.NEXT_PAGE && page + 1 < pageCount) {
 			setPage((prev) => prev + 1)
-		} else if (option === '-' && page !== 0) {
+		} else if (option === Navigation.PREV_PAGE && page !== 0) {
 			setPage((prev) => prev - 1)
 		}
 	}
 
 	return (
-		<Box className='App'>
+		<Box>
 			<Grid container direction='column' alignItems='center'>
 				<Box className={classes.header}>
 					<Header title={title} />

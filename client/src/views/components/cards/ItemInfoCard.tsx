@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Item } from '../../types'
-import { removeTags } from '../../utils'
+import { Item } from '../../../types'
 import ItemDialog from '../ItemDialog'
 import {
 	Grid,
@@ -26,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 'bold',
 	},
 }))
+
+const removeTags = (str: string) => {
+	if (str === null || str === '') return false
+	else str = str.toString()
+	return str.replace(/(<([^>]+)>)/gi, '')
+}
 
 const ItemInfoCard: React.FC<Props> = ({ item }) => {
 	const classes = useStyles()

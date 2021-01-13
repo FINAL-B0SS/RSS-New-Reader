@@ -1,4 +1,5 @@
 import React from 'react'
+import { Navigation } from '../../types'
 import { Box, Grid, Button, makeStyles } from '@material-ui/core/'
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 }
 
 const useStyles = makeStyles((theme) => ({
-	searchButton: {
+	button: {
 		fontSize: '1rem',
 		justify: 'right',
 		color: '#FFFFFF',
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		border: '2px solid black',
 		backgroundColor: '#6441A5',
 		width: theme.spacing(10),
-		height: theme.spacing(7),
+		height: theme.spacing(5),
 		borderRadius: theme.spacing(1),
 	},
 	box: {
@@ -49,27 +50,27 @@ const PageNavigation: React.FC<Props> = ({
 					<Box className={classes.box}>
 						{!isHome && (
 							<Button
-								onClick={() => callback('.')}
-								className={classes.searchButton}
+								onClick={() => callback(Navigation.HOME)}
+								className={classes.button}
 							>
 								Home
 							</Button>
 						)}
 						{pageCount > 1 && (
-							<div>
+							<>
 								<Button
-									onClick={() => callback('-')}
-									className={classes.searchButton}
+									onClick={() => callback(Navigation.PREV_PAGE)}
+									className={classes.button}
 								>
 									Prev
 								</Button>
 								<Button
-									onClick={() => callback('+')}
-									className={classes.searchButton}
+									onClick={() => callback(Navigation.NEXT_PAGE)}
+									className={classes.button}
 								>
 									Next
 								</Button>
-							</div>
+							</>
 						)}
 					</Box>
 				</Grid>
